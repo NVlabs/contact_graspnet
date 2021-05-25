@@ -107,7 +107,7 @@ def train(global_config, log_dir):
         sess.run(ops['iterator'].initializer)
         epoch_time = time.time()
         step = train_one_epoch(sess, ops, summary_ops, file_writers, pcreader)
-        log_string('trained %s batches in: ' % steps_per_epoch, time.time()-epoch_time)
+        log_string('trained epoch {} in: {}'.format(epoch, time.time()-epoch_time))
 
         # Save the variables to disk.
         save_path = saver.save(sess, os.path.join(log_dir, "model.ckpt"), global_step=step, write_meta_graph=False)
@@ -116,7 +116,7 @@ def train(global_config, log_dir):
         if num_test_samples > 0:
             eval_time = time.time()
             eval_validation_scenes(sess, ops, summary_ops, file_writers, pcreader)
-            log_string('evaluation time: ', time.time()-eval_time)
+            log_string('evaluation time: {}'.format(time.time()-eval_time))
 
 def train_one_epoch(sess, ops, summary_ops, file_writers, pcreader):
     """ ops: dict mapping from string to tf ops """
@@ -187,7 +187,6 @@ def eval_validation_scenes(sess, ops, summary_ops, file_writers, pcreader, max_e
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser()
-    parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
     parser.add_argument('--ckpt_dir', default='checkpoints/contact_graspnet', help='Checkpoint dir')
     parser.add_argument('--data_path', type=str, default=None, help='Grasp data root dir')
     parser.add_argument('--max_epoch', type=int, default=None, help='Epochs to run')
