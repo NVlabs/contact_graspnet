@@ -12,7 +12,7 @@ ICRA 2021
 
 ## Installation
 
-This code has been tested with python 3.7, tensorflow 2.2, CUDA 10.1, and CUDNN 7.6.0
+This code has been tested with python 3.7, tensorflow 2.2, CUDA 11.1
 
 Create the conda env
 ```
@@ -21,7 +21,10 @@ conda env create -f contact_graspnet_env.yml
 
 ### Troubleshooting
 
-- Recompile pointnet2 tf_ops, see [here](pointnet2/tf_ops/HowTO.md) 
+- Recompile pointnet2 tf_ops:
+```shell
+sh compile_pointnet_tfops.sh
+```
 
 ### Hardware
 Training: 1x Nvidia GPU >= 24GB VRAM, >=64GB RAM  
